@@ -1,7 +1,7 @@
 import PyPDF2
 import pefile
 import shlex
-import docx
+#import docx
 
 filename = input("Enter file path: ")
 
@@ -23,7 +23,6 @@ if filename.endswith('.pdf'):
 if filename.endswith('.exe'):
     pe = pefile.PE(filename)
     with open("metadata_exe.txt", "w") as f:
-        # Write out the metadata to the file
         f.write("DOS Header:\n")
         print("DOS Header:\n")
         print(str(pe.DOS_HEADER) + "\n\n")
@@ -69,32 +68,18 @@ if filename.endswith('.exe'):
 
 if filename.endswith('.sh'):
     file_path = filename
-
-    # Open the file and read its contents
     with open(file_path, "r") as f:
         script = f.read()
-
-    # Use shlex to split the script into tokens
     tokens = shlex.split(script)
-
-    # Get the number of tokens and lines in the script
     num_tokens = len(tokens)
     num_lines = script.count("\n")
-
-    # Get the shebang line, if present
     shebang_line = ""
     if tokens and tokens[0].startswith("#!"):
         shebang_line = tokens.pop(0)
-
-    # Get the list of command names used in the script
     command_names = [t for t in tokens if not t.startswith("-") and not t.startswith("$")]
     unique_command_names = sorted(set(command_names))
-
-    # Get the list of options used in the script
     options = [t for t in tokens if t.startswith("-")]
     unique_options = sorted(set(options))
-
-    # Print out the metadata
     with open("metadata_sh.txt", "w") as f:
         f.write("File name:", file_path)
         f.write("Number of tokens:", num_tokens)
@@ -112,57 +97,20 @@ if filename.endswith('.sh'):
 
 
     
-if filename.endswith('.doc') or filename.endswith('.docx'):
-    # Replace "your_file.docx" with the name of your actual DOCX file
-    file_path = filename
-
-    # Load the document using python-docx
-    document = docx.Document(file_path)
-
-    # Get the document properties
-    properties = document.core_properties
-
-    # Extract the metadata fields
-    title = properties.title
-    author = properties.author
-    created = properties.created
-    modified = properties.modified
-    keywords = properties.keywords
-
-    # Print out the metadata
-    print("File name:", file_path)
-    print("Title:", title)
-    print("Author:", author)
-    print("Created:", created)
-    print("Modified:", modified)
-    print("Keywords:", keywords)
+# if filename.endswith('.doc') or filename.endswith('.docx'):
+#     file_path = filename
+#     document = docx.Document(file_path)
+#     properties = document.core_properties
+#     title = properties.title
+#     author = properties.author
+#     created = properties.created
+#     modified = properties.modified
+#     keywords = properties.keywords
+#     print("File name:", file_path)
+#     print("Title:", title)
+#     print("Author:", author)
+#     print("Created:", created)
+#     print("Modified:", modified)
+#     print("Keywords:", keywords)
 else:
-    print("Unsupported file format!")
-
-
-
-
-
-
-
-
-
-# import hashlib
-# import PyPDF2
-
-# filename = input("Enter file path: ")
-
-# if filename.endswith('.pdf'):
-#     with open(filename, 'rb') as f:
-#         pdf = PyPDF2.PdfFileReader(f)
-#         pdf_content = f.read()
-#         pdf_hash = hashlib.sha256(pdf_content).hexdigest()
-
-#         print(f"PDF hash:\n{pdf_hash}")
-
-# else:
-#     print("Unsupported file format!")
-
-
-
-#/Users/kashishhanda/Downloads/sample.pdf
+    print("Unsupported file format! please choose either a exe, pdf or shell file")
