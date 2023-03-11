@@ -81,12 +81,12 @@ if filename.endswith('.sh'):
     options = [t for t in tokens if t.startswith("-")]
     unique_options = sorted(set(options))
     with open("metadata_sh.txt", "w") as f:
-        f.write("File name:", file_path)
-        f.write("Number of tokens:", num_tokens)
-        f.write("Number of lines:", num_lines)
-        f.write("Shebang line:", shebang_line)
-        f.write("Command names:", unique_command_names)
-        f.write("Options:", unique_options)
+        f.write("File name: "+file_path+"\n")
+        f.write("Number of tokens:"+str(num_tokens)+"\n")
+        f.write("Number of lines:"+str(num_lines)+"\n")
+        f.write("Shebang line:"+str(shebang_line)+"\n")
+        f.write("Command names:"+str(unique_command_names)+"\n")
+        f.write("Options:"+str(unique_options)+"\n")
 
     print("File name:", file_path)
     print("Number of tokens:", num_tokens)
