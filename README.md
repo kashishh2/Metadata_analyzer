@@ -10,4 +10,3 @@ Run the code: `python3 meta_analysis.py`
 Note: some testing samples are included in the `/testing samples` folder, they are not malicious and are simple samples for demo purposes.
 
 Tutorial video : https://www.youtube.com/watch?v=VMuOy4Pr7h4
-
